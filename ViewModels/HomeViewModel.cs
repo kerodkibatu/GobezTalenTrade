@@ -17,6 +17,7 @@ public partial class HomeViewModel : BaseViewModel
     [RelayCommand]
     async Task FetchSkills()
     {
+        QueryText = "";
         var skills = skillsService.FetchSkills();
         SkillsList.Clear();
         foreach (var skill in skills)

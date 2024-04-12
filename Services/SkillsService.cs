@@ -23,7 +23,7 @@ public class SkillsService
                                         skill.owner.Username.Contains(Query));
     }
     // Post a new skill
-    public Skill PostSkill(string username, string title, string description, SkillLevel level, List<string> tags, decimal price, string photo)
+    public Skill PostSkill(string username, string title, string description, string level, List<string> tags, decimal price, string photo)
     {
         var user = userService.GetByUserName(username) ?? throw new ArgumentException("User not found.");
         var newSkill = new Skill(user, title, description, level, tags, price, photo);

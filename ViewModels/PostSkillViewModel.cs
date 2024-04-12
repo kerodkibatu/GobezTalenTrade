@@ -21,7 +21,7 @@ public partial class PostSkillViewModel : BaseViewModel
     [ObservableProperty]
     string description;
     [ObservableProperty]
-    SkillLevel level;
+    string level;
     [ObservableProperty]
     string tagsAsString;
     [ObservableProperty]
@@ -63,5 +63,16 @@ public partial class PostSkillViewModel : BaseViewModel
     {
         skillsService.PostSkill(userService.CurrentUser!.Username, Title, Description, Level, [..TagsAsString.Split(',')], Price, Photo);
         await Snackbar.Make("Skill Posted Successfully!").Show();
+        ClearForm();
+        await Shell.Current.GoToAsync("///home");
+    }
+    void ClearForm()
+    {
+        Title = "";
+        Description = "";
+        Level = "";
+        TagsAsString = "";
+        Price = 0;
+        Photo = "";
     }
 }

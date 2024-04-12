@@ -23,11 +23,18 @@
             x:Name="refreshView"
             Refreshing="refreshView_Refreshing"
             Grid.Row="1" 
-            Command="{Binding FetchSkillsCommand}">
+            Command="{Binding FetchSkillsCommand}" Margin="10">
             <CollectionView ItemsSource="{Binding SkillsList}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
                 </CollectionView.ItemsLayout>
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout VerticalOptions="Center"
+                                         HorizontalOptions="Center">
+                        <Image Source="error.png" WidthRequest="120" HeightRequest="120"/>
+                        <Label Text="No Skills Matching&#10;Your Criteria Found!&#10;Try Refreshing!" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="m:Skill">
                         <Border
@@ -36,7 +43,7 @@
                             Background="{StaticResource Gray950}">
 
                             <Grid RowDefinitions="120,Auto,Auto,Auto"
-                                  ColumnDefinitions="*,*">
+                                  ColumnDefinitions="*,*" Padding="5">
                                 <Image Source="{Binding Photo}"
                                        Aspect="AspectFill"
                                        Grid.ColumnSpan="2"/>
