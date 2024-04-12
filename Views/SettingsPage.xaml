@@ -4,5 +4,31 @@
 			 xmlns:vm="clr-namespace:GobezTalenTrade.ViewModels"
 			 x:Class="GobezTalenTrade.Views.SettingsPage"
 			 x:DataType="vm:SettingsViewModel">
+    <Grid RowDefinitions="100,*,Auto">
+        <Border StrokeShape="RoundRectangle 50">
+            <Grid ColumnDefinitions="100,*,100">
+                <Border StrokeThickness="0" StrokeShape="RoundRectangle 50">
+                    <Image 
+                        Source="{Binding UserProfilePicture}" 
+                        HeightRequest="100" WidthRequest="100" 
+                        Aspect="AspectFill" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                </Border>
+                <Label
+                    Grid.Column="1"
+                    Text="{Binding Username}"
+                    FontSize="30"
+                    Margin="10" />
+                
+                <ImageButton
+                    HeightRequest="60"
+                    WidthRequest="60"
+                    Aspect="AspectFit"
+                    Grid.Column="2"
+                    Source="signout.png"
+                    Command="{Binding LogoutCommand}"
+                    Padding="150"/>
+            </Grid>
+        </Border>
 
+    </Grid>
 </ContentPage>

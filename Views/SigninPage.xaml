@@ -3,6 +3,55 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:vm="clr-namespace:GobezTalenTrade.ViewModels"
 			 x:Class="GobezTalenTrade.Views.SigninPage"
+             Shell.TabBarIsVisible="False"
+             Title="Login"
 			 x:DataType="vm:SigninViewModel">
+    <Shell.TitleView>
+        <Label 
+            Text="Login"
+            FontSize="32"
+            TextColor="{StaticResource PrimaryDark}"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"/>
+    </Shell.TitleView>
+    <VerticalStackLayout Margin="20" VerticalOptions="Center" HorizontalOptions="Center" MinimumWidthRequest="300">
+        <!-- Username Entry -->
+        <Entry Placeholder="Username" Text="{Binding Username}" />
 
+        <!-- Password Entry -->
+        <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" />
+        <Grid ColumnDefinitions="Auto,*"
+              IsVisible="{Binding IsSignUpMode}">
+            <Border StrokeShape="RoundRectangle 50"
+                    Stroke="White">
+                <Image Source="{Binding ProfilePicture}"
+                   Aspect="AspectFill"
+                   WidthRequest="100"
+                   HeightRequest="100"/>
+            </Border>
+            <Button
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Text="Choose Picture"
+                Command="{Binding ChooseProfilePictureCommand}" />
+        </Grid>
+        <!-- CheckBox for Sign Up -->
+        <Grid ColumnDefinitions="*,Auto,Auto">
+            <Label Grid.Column="1" Text="Signup" VerticalTextAlignment="Center"/>
+            <CheckBox
+                Grid.Column="2"
+                VerticalOptions="Center"
+                IsChecked="{Binding IsSignUpMode}" />
+        </Grid>
+        <!-- Additional Entry for Profile Picture -->
+
+        <!-- Sign In Button -->
+        <Button Text="Sign In" IsVisible="{Binding IsSignInMode}" Command="{Binding SignInCommand}" 
+                    BackgroundColor="Blue" TextColor="White" CornerRadius="5" Margin="0,20,0,0" />
+
+        <!-- Sign Up Button -->
+        <Button Text="Sign Up" IsVisible="{Binding IsSignUpMode}" Command="{Binding SignUpCommand}" 
+                    BackgroundColor="Green" TextColor="White" CornerRadius="5" Margin="0,10,0,0" />
+    </VerticalStackLayout>
 </ContentPage>

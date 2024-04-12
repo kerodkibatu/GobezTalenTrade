@@ -4,5 +4,30 @@
 			 xmlns:vm="clr-namespace:GobezTalenTrade.ViewModels"
 			 x:Class="GobezTalenTrade.Views.PostSkillPage"
 			 x:DataType="vm:PostSkillViewModel">
+    <VerticalStackLayout Margin="20" Spacing="20">
+        <Entry Placeholder="Title" Text="{Binding Title}" />
+        <Editor Placeholder="Description" Text="{Binding Description}" />
 
+        <!-- Skill Level Selector -->
+        <Label Text="Skill Level" />
+        <Picker SelectedItem="{Binding Level}">
+            <Picker.Items>
+                <x:String>Easy</x:String>
+                <x:String>Medium</x:String>
+                <x:String>Hard</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <!-- Tags Entry -->
+        <Entry Placeholder="Tags (comma-separated)" Text="{Binding TagsAsString}" />
+
+        <!-- Price Entry -->
+        <Entry Placeholder="Price" Text="{Binding Price}" Keyboard="Numeric" />
+
+        <!-- Select Images Button -->
+        <Button Text="Select Cover Photo" Command="{Binding ChoosePhotoCommand}" />
+
+        <!-- Post Skill Button -->
+        <Button Text="Post Skill" Command="{Binding PostSkillCommand}" />
+    </VerticalStackLayout>
 </ContentPage>

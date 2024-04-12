@@ -7,4 +7,9 @@ public partial class HomePage : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
+
+    private void refreshView_Refreshing(object sender, EventArgs e)
+    {
+		refreshView.IsRefreshing = false;
+    }
 }

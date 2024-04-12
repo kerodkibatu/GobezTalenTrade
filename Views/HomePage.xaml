@@ -2,7 +2,82 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:vm="clr-namespace:GobezTalenTrade.ViewModels"
+			 xmlns:m="clr-namespace:GobezTalenTrade.Models"
 			 x:Class="GobezTalenTrade.Views.HomePage"
 			 x:DataType="vm:HomeViewModel">
+    <Grid RowDefinitions="Auto,*">
+        <Border BackgroundColor="{StaticResource Gray600}"
+                StrokeShape="RoundRectangle 30">
+            <Grid ColumnDefinitions="*,Auto">
+                <Entry Placeholder="Search Here..." Text="{Binding QueryText}" Margin="10,0"/>
+                <ImageButton 
+                Grid.Column="1"
+                Source="search.png"
+                HeightRequest="45"
+                WidthRequest="45"
+                Command="{Binding SearchSkillsCommand}"
+                CornerRadius="20"/>
+            </Grid>
+        </Border>
+        <RefreshView 
+            x:Name="refreshView"
+            Refreshing="refreshView_Refreshing"
+            Grid.Row="1" 
+            Command="{Binding FetchSkillsCommand}">
+            <CollectionView ItemsSource="{Binding SkillsList}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:Skill">
+                        <Border
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 10"
+                            Background="{StaticResource Gray950}">
 
+                            <Grid RowDefinitions="120,Auto,Auto,Auto"
+                                  ColumnDefinitions="*,*">
+                                <Image Source="{Binding Photo}"
+                                       Aspect="AspectFill"
+                                       Grid.ColumnSpan="2"/>
+                                <Border VerticalOptions="Start"
+                                        Margin="5"
+                                        HorizontalOptions="End"
+                                        Grid.Column="1"
+                                        Padding="10,0"
+                                        StrokeThickness="0"
+                                        BackgroundColor="LimeGreen"
+                                        StrokeShape="RoundRectangle 20">
+                                    <Label Text="{Binding Level}"/>
+                                </Border>
+
+                                <Label
+                                    Grid.Row="1"
+                                    Text="{Binding Title}"
+                                    FontAttributes="Bold"
+                                    Grid.ColumnSpan="2"
+                                    FontSize="Large"/>
+                                <Label
+                                    Grid.Row="2"
+                                    Text="{Binding Description}"
+                                    MaxLines="1"
+                                    Grid.ColumnSpan="2"
+                                    FontAttributes="Bold"
+                                    FontSize="Small"/>
+                                <Label Text="{Binding owner.Username}"
+                                       Grid.Row="3"/>
+
+                                <Label Text="{Binding Price,StringFormat='${0}'}"
+                                       Grid.Row="3"
+                                       Grid.Column="1"
+                                       HorizontalOptions="End"/>
+
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
 </ContentPage>
